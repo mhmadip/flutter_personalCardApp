@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MyApp());
 }
+
+final Uri _emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: 'mhmadip@gmail.com',
+    queryParameters: {'subject': 'Personal_mail!'});
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.lightBlue,
         body: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -51,12 +57,15 @@ class MyApp extends StatelessWidget {
                       Icons.phone,
                       color: Colors.teal,
                     ),
-                    title: Text(
-                      "07508608162",
-                      style: TextStyle(
-                        color: Colors.teal.shade900,
-                        fontFamily: 'Source Sans Pro',
-                        fontSize: 20.0,
+                    title: GestureDetector(
+                      onTap: () => launch('tel: 07508608162'),
+                      child: Text(
+                        "07508608162",
+                        style: TextStyle(
+                          color: Colors.teal.shade900,
+                          fontFamily: 'Source Sans Pro',
+                          fontSize: 20.0,
+                        ),
                       ),
                     )),
               ),
@@ -68,15 +77,25 @@ class MyApp extends StatelessWidget {
                       Icons.email,
                       color: Colors.teal,
                     ),
-                    title: Text(
-                      "mhmadip@gmail.com",
-                      style: TextStyle(
-                        color: Colors.teal.shade900,
-                        fontFamily: 'Source Sans Pro',
-                        fontSize: 20.0,
+                    title: GestureDetector(
+                      onTap: () => launch(_emailLaunchUri.toString()),
+                      child: Text(
+                        "mhmadip@gmail.com",
+                        style: TextStyle(
+                          color: Colors.teal.shade900,
+                          fontFamily: 'Source Sans Pro',
+                          fontSize: 20.0,
+                        ),
                       ),
                     )),
-              )
+              ),
+              SizedBox(
+                height: 20.0,
+                width: 150.0,
+                child: Divider(
+                  color: Colors.teal.shade100,
+                ),
+              ),
             ],
           ),
         ),
